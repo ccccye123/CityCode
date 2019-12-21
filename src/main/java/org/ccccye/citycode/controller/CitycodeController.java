@@ -19,6 +19,11 @@ public class CitycodeController{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @RequestMapping("/")
+    public String hello(){
+        return "Hello World";
+    }
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Citycode> getList(){
         String sql = "select * from CityCode limit 0,10";
