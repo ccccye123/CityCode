@@ -44,7 +44,30 @@ public class CitycodeController{
 
     @RequestMapping(value = "queryByName/{name}", method = RequestMethod.GET)
     public Citycode queryByName(@PathVariable("name") String cityName){
+        if (cityName.endsWith("市")){
+            cityName = cityName.substring(0, cityName.length()-1);
+        }
+
         String sql = String.format("select * from CityCode where City_CN = '%s'", cityName);
+
+        Citycode city = jdbcTemplate.query(sql, new RowMapper<Citycode>() {
+            @Override
+            public Citycode mapRow(ResultSet resultSet, int i) throws SQLException {
+                Citycode student = new Citycode();
+                student.setCity_ID(resultSet.getString("City_ID"));
+                student.setCity_EN(resultSet.getString("City_EN"));
+                student.setCity_CN(resultSet.getString("City_CN"));
+                student.setAD_code(resultSet.getString("AD_code"));
+                return student;
+            }
+        }).get(0);
+
+        return city;
+    }
+
+    @RequestMapping(value = "queryByAdcode", method = RequestMethod.GET)
+    public Citycode queryBuAdcode(@PathVariable("code") String adcode){
+        String sql = String.format("select * from CityCode where AD_code = '%s'", adcode);
 
         Citycode city = jdbcTemplate.query(sql, new RowMapper<Citycode>() {
             @Override
