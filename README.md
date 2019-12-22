@@ -5,3 +5,5 @@
 - /list  默认获取10个记录
 
 - /queryByName/{cityname}  // 根据城市名称查询
+
+- /queryByAdcode/{adcode}  // 根据城市adcode查询
