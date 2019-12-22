@@ -65,7 +65,7 @@ public class CitycodeController{
         return city;
     }
 
-    @RequestMapping(value = "queryByAdcode", method = RequestMethod.GET)
+    @RequestMapping(value = "queryByAdcode/{code}", method = RequestMethod.GET)
     public Citycode queryBuAdcode(@PathVariable("code") String adcode){
         String sql = String.format("select * from CityCode where AD_code = '%s'", adcode);
 
