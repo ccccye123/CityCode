@@ -19,14 +19,14 @@ public class CitycodeController{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @RequestMapping("/")
-    public String hello(){
-        return "Hello World";
-    }
-
+    /**
+     * 获取全部的城市编码
+     * @return
+     */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public List<Citycode> getList(){
-        String sql = "select * from CityCode limit 0,10";
+//        String sql = "select * from CityCode limit 0,10";
+        String sql = "select * from CityCode ";
         List<Citycode> citys = jdbcTemplate.query(sql, new RowMapper<Citycode>() {
             @Override
             public Citycode mapRow(ResultSet resultSet, int i) throws SQLException {
